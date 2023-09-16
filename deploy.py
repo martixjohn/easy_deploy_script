@@ -63,7 +63,7 @@ if(__name__ == '__main__'):
     print_warning('{} not exists'.format(dependents_file_path))
     exit(-1)
 
-  print_info('read configuration from{}'.format(dependents_file_path))
+  print_info('read configuration from {}'.format(dependents_file_path))
   
   # 
   # initialize vars
