@@ -7,6 +7,9 @@ Python 3 must be installed
 
 #### deploy.py
 
+**search the specified files recursively in directories and copy them to the destination**
+
+
 ```shell
 python deploy.py [configuration_file]
 ```
