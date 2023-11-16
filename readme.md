@@ -2,20 +2,24 @@
 
 Scripts providing an convenient way to deploy or install the binary etc. 
 
-This Script can be used to copy dlls, binaries, docs, etc.
+This Script can be used to **COPY** dlls, binaries, docs, etc.
+
+It will **searches the specified files recursively in directories and copies them to the destination**
+
 
 ## Prerequisites
-Python 3 must be installed
 
-#### deploy.py
+Python 3 MUST be installed
 
-**search the specified files recursively in directories and copy them to the destination**
+## How to use
 
 
 ```shell
 python deploy.py [configuration_file] [out_dir]
 ```
 - configuration_file: The file path including configurations 
+
+- out_dir \[optional\]: the destination directory
 
 #### Configuration File
 
@@ -44,4 +48,4 @@ Here is an example:
 
 - search_dirs: where to search the targets
 
-- out_dir \[optional\]: the destination directory
+- out_dir \[optional\]: the destination directory. When `out_dir` arg is given, this will be ignored
