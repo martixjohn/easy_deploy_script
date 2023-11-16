@@ -44,4 +44,4 @@ Here is an example:
 
 - search_dirs: where to search the targets
 
-- out_dir: the destination directory
+- out_dir \[optional\]: the destination directory
