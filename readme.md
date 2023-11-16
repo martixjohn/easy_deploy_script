@@ -2,6 +2,8 @@
 
 Scripts providing an convenient way to deploy or install the binary etc. 
 
+This Script can be used to copy dlls, binaries, docs, etc.
+
 ## Prerequisites
 Python 3 must be installed
 
@@ -11,17 +13,19 @@ Python 3 must be installed
 
 
 ```shell
-python deploy.py [configuration_file]
+python deploy.py [configuration_file] [out_dir]
 ```
 - configuration_file: The file path including configurations 
 
-#### configuration_file
+#### Configuration File
+
+Configuration-File Must be type of JSON
 
 Here is an example:
 
 ```json
 {
-  "target": [
+  "targets": [
     "a.dll",
     "b.dll",
     "c.exe"
@@ -34,4 +38,10 @@ Here is an example:
 }
 ```
 
+**The Details For the Keys in JSON:**
 
+- targets: what you want to copy, which are the names of the files
+
+- search_dirs: where to search the targets
+
+- out_dir: the destination directory
