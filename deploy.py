@@ -53,24 +53,32 @@ def walk_file(dir: str):
 if(__name__ == '__main__'):
   cwd_path = os.getcwd()
   # print(cwd_path)
-  dependents_file_path = ''
+  configuration_path = ''
+  out_dir = ''
+
+  # read configuration file path
   if len(sys.argv) > 1: 
-    dependents_file_path = sys.argv[1]
-  dependents_file_path = os.path.join(dependents_file_path)
+    configuration_path = os.path.join(sys.argv[1])
 
-  # check if has dependents_file_path
-  if not os.path.exists(dependents_file_path):
-    print_warning('{} not exists'.format(dependents_file_path))
+  # check if has configuration_path
+  if not os.path.exists(configuration_path):
+    print_warning('{} not exists'.format(configuration_path))
     exit(-1)
-
-  print_info('read configuration from {}'.format(dependents_file_path))
   
+  print_info('read configuration from{}'.format(configuration_path))
+  
+  # out dir
+  if len(sys.argv) > 2: 
+    out_dir = os.path.join(sys.argv[2])
+
   # 
   # initialize vars
   #
   try:
-    with open(dependents_file_path, mode = 'r') as f:
+    with open(configuration_path, mode = 'r') as f:
       json_data = json.load(f)
+    if out_dir != '':
+      json_data['out_dir'] = out_dir
   except:
     print_config_error()
     exit(-1)
@@ -78,20 +86,19 @@ if(__name__ == '__main__'):
   #
   # check config file
   #
-  if 'targets' not in json_data or 'search_dirs' not in json_data or 'out_dir' not in json_data:
+  if 'targets' not in json_data or 'search_dirs' not in json_data:
     print_config_error()
     exit(-1)
-
   for k in json_data:
     v = json_data[k]
-    # print(k, type(v))
     if ('targets' == k and not isinstance(v, list)) or ('search_dirs' == k and not isinstance(v, list)) or ('out_dir' == k and not isinstance(v, str)) :
       print_config_error()
       exit(-1)
 
-
+  # Make Dir for out_dir
   if not os.path.exists(json_data['out_dir']):
     os.mkdir(json_data['out_dir'])
+
   # print_info('configurations: {}'.format(json_data))
   targets_rest_count = len(json_data['targets'])
   # mark targets as not found 
@@ -112,4 +119,4 @@ if(__name__ == '__main__'):
       i += 1
   t = time.time() - t
   print()
-  print_info('finished at {} {}'.format(t if t > 1 else t * 1000, 's' if t > 1 else 'ms'))
+  print_info('Copy Dlls Finished at {} {}'.format(t if t > 1 else t * 1000, 's' if t > 1 else 'ms'))
